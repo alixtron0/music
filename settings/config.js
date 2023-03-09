@@ -1,10 +1,10 @@
 module.exports = {
-  TOKEN: process.env.TOKEN || "token",
+  TOKEN: process.env.TOKEN || "OTUyNDY3OTEyMzg2NTcyMzM4.Gu8mz1.k7sZXT4GQ5EP_Y33v2JDuOHTrsj1Fra5Od-TJw",
   PREFIX: process.env.PREFIX || "x.",
   embed: {
     color: process.env.color || "#220f80",
     wrongcolor: process.env.wrongcolor || "#8a0808",
-    footertext: "Coded By xtron | Tech Boy Development",
+    footertext: "Coded By xtron  Development",
   },
   emoji: {
     ERROR: "❌",
@@ -74,9 +74,9 @@ module.exports = {
     inviteURL:
       process.env.inviteURL ||
       `https://discord.com/api/oauth2/authorize?client_id=BOTID&permissions=8&scope=bot%20applications.commands`,
-    DiscordServer: process.env.DiscordServer || `https://discord.gg/qagQXgwW2Q`,
-    VoteURL: process.env.VoteURL || `https://discord.gg/qagQXgwW2Q`,
-    Website: `https://xtron.ml/`,
+    DiscordServer: process.env.DiscordServer || `https://discord.gg/FuKfAREn9f`,
+    VoteURL: process.env.VoteURL || `https://discord.gg/FuKfAREn9f`,
+    Website: `https://jugnu.netlify.app/`,
   },
   options: {
     embedFooter: true,

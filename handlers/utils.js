@@ -61,11 +61,11 @@ module.exports = async (client) => {
     if (!ID) return;
     let playembed = channel.messages.cache.get(ID);
     if (!playembed) {
-      playembed = await channel.messages.fetch(ID).catch((e) => {});
+      playembed = await channel.messages.fetch(ID).catch((e) => { });
     }
     if (!playembed) return;
     if (client.config.options.nowplayingMsg == true) {
-      playembed.delete().catch((e) => {});
+      playembed.delete().catch((e) => { });
     } else {
       let embeds = playembed?.embeds ? playembed?.embeds[0] : null;
       if (embeds) {
@@ -79,7 +79,7 @@ module.exports = async (client) => {
             ],
             components: [client.buttons(true)],
           })
-          .catch((e) => {});
+          .catch((e) => { });
       }
     }
   };
@@ -100,10 +100,9 @@ module.exports = async (client) => {
         songs
           .map(
             (track, index) =>
-              `\` ${i + ++index}. \` ** ${track.name.substring(0, 35)}** - \`${
-                track.isLive
-                  ? `LIVE STREAM`
-                  : track.formattedDuration.split(` | `)[0]
+              `\` ${i + ++index}. \` ** ${track.name.substring(0, 35)}** - \`${track.isLive
+                ? `LIVE STREAM`
+                : track.formattedDuration.split(` | `)[0]
               }\` \`${track.user.tag}\``
           )
           .join(`\n`)
@@ -121,20 +120,18 @@ module.exports = async (client) => {
           })
           .addFields([
             {
-              name: `**\` N. \` *${
-                tracks.length > maxTracks
-                  ? tracks.length - maxTracks
-                  : tracks.length
-              } other Tracks ...***`,
+              name: `**\` N. \` *${tracks.length > maxTracks
+                ? tracks.length - maxTracks
+                : tracks.length
+                } other Tracks ...***`,
               value: `\u200b`,
             },
             {
               name: `**\` 0. \` __CURRENT TRACK__**`,
-              value: `**${queue.songs[0].name.substring(0, 35)}** - \`${
-                queue.songs[0].isLive
-                  ? `LIVE STREAM`
-                  : queue.songs[0].formattedDuration.split(` | `)[0]
-              }\` \`${queue.songs[0].user.tag}\``,
+              value: `**${queue.songs[0].name.substring(0, 35)}** - \`${queue.songs[0].isLive
+                ? `LIVE STREAM`
+                : queue.songs[0].formattedDuration.split(` | `)[0]
+                }\` \`${queue.songs[0].user.tag}\``,
             },
           ])
           .setColor(client.config.embed.color)
@@ -145,10 +142,8 @@ module.exports = async (client) => {
   };
 
   client.status = (queue) =>
-    `Volume: ${queue.volume}% • Status : ${
-      queue.paused ? "Paused" : "Playing"
-    } • Loop:  ${
-      queue.repeatMode === 2 ? `Queue` : queue.repeatMode === 1 ? `Song` : `Off`
+    `Volume: ${queue.volume}% • Status : ${queue.paused ? "Paused" : "Playing"
+    } • Loop:  ${queue.repeatMode === 2 ? `Queue` : queue.repeatMode === 1 ? `Song` : `Off`
     } •  Autoplay: ${queue.autoplay ? `On` : `Off`} `;
 
   // embeds
@@ -159,7 +154,7 @@ module.exports = async (client) => {
   client.queueembed = (guild) => {
     let embed = new EmbedBuilder()
       .setColor(client.config.embed.color)
-      .setTitle(`Jugnu | Queue`);
+      .setTitle(`TN | Queue`);
     // .setDescription(`\n\n ** There are \`0\` Songss in Queue ** \n\n`)
     // .setThumbnail(guild.iconURL({ dynamic: true }))
     // .setFooter({
@@ -182,7 +177,7 @@ module.exports = async (client) => {
         iconURL: client.user.displayAvatarURL(),
       })
       .setDescription(
-        ` [Invite Now](${client.config.links.inviteURL}) • [Support Server](${client.config.links.DiscordServer}) • [Website](${client.config.links.Website}) • [alixtron](https://discord.gg/qagQXgwW2Q})`
+        ` [Invite Now](https://discord.com/api/oauth2/authorize?client_id=952467912386572338&permissions=1088811301696&scope=bot) • [Support Server](https://discord.gg/qagQXgwW2Q) • [Website](https://xtron.ml) • [alixtron](https://discord.gg/qagQXgwW2Q})`
       )
       .setImage(
         guild.banner
@@ -211,12 +206,12 @@ module.exports = async (client) => {
     // play msg
     let playmsg = musicchannel.messages.cache.get(data.pmsg);
     if (!playmsg) {
-      playmsg = await musicchannel.messages.fetch(data.pmsg).catch((e) => {});
+      playmsg = await musicchannel.messages.fetch(data.pmsg).catch((e) => { });
     }
     // queue message
     let queuemsg = musicchannel.messages.cache.get(data.qmsg);
     if (!queuemsg) {
-      queuemsg = await musicchannel.messages.fetch(data.qmsg).catch((e) => {});
+      queuemsg = await musicchannel.messages.fetch(data.qmsg).catch((e) => { });
     }
     if (!queuemsg || !playmsg) return;
     await playmsg
@@ -227,9 +222,9 @@ module.exports = async (client) => {
       .then(async (msg) => {
         await queuemsg
           .edit({ embeds: [client.queueembed(guild)] })
-          .catch((e) => {});
+          .catch((e) => { });
       })
-      .catch((e) => {});
+      .catch((e) => { });
   };
 
   // update queue
@@ -249,16 +244,15 @@ module.exports = async (client) => {
     if (!queueembed) {
       queueembed = await musicchannel.messages
         .fetch(data.qmsg)
-        .catch((e) => {});
+        .catch((e) => { });
     }
     if (!queueembed) return;
     let currentSong = queue.songs[0];
     let string = queue.songs
       ?.filter((t, i) => i < 10)
       ?.map((track, index) => {
-        return `\` ${index + 1}. \` ** ${track.name.substring(0, 35)}** - \`${
-          track.isLive ? `LIVE STREAM` : track.formattedDuration.split(` | `)[0]
-        }\` \`${track.user.tag}\``;
+        return `\` ${index + 1}. \` ** ${track.name.substring(0, 35)}** - \`${track.isLive ? `LIVE STREAM` : track.formattedDuration.split(` | `)[0]
+          }\` \`${track.user.tag}\``;
       })
       ?.reverse()
       .join("\n");
@@ -274,11 +268,10 @@ module.exports = async (client) => {
           .addFields([
             {
               name: `**\` 0. \` __CURRENT TRACK__**`,
-              value: `**${currentSong.name.substring(0, 35)}** - \`${
-                currentSong.isLive
-                  ? `LIVE STREAM`
-                  : currentSong.formattedDuration.split(` | `)[0]
-              }\` \`${currentSong.user.tag}\``,
+              value: `**${currentSong.name.substring(0, 35)}** - \`${currentSong.isLive
+                ? `LIVE STREAM`
+                : currentSong.formattedDuration.split(` | `)[0]
+                }\` \`${currentSong.user.tag}\``,
             },
           ])
           .setFooter({
@@ -303,7 +296,7 @@ module.exports = async (client) => {
     if (!musicchannel) return;
     let playembed = musicchannel.messages.cache.get(data.pmsg);
     if (!playembed) {
-      playembed = await musicchannel.messages.fetch(data.pmsg).catch((e) => {});
+      playembed = await musicchannel.messages.fetch(data.pmsg).catch((e) => { });
     }
     if (!playembed || !playembed.id) return;
     let track = queue.songs[0];
@@ -427,7 +420,7 @@ module.exports = async (client) => {
               ephemeral: true,
             });
           })
-          .catch((e) => {});
+          .catch((e) => { });
 
         return false;
       }
@@ -438,11 +431,11 @@ module.exports = async (client) => {
 
     colector.on("collect", async (i) => {
       if (i.isButton()) {
-        await i.deferUpdate().catch((e) => {});
+        await i.deferUpdate().catch((e) => { });
         let directory = i.customId;
         console.log("CustomId", directory);
         if (directory == "home") {
-          main_msg.edit({ embeds: [help_embed] }).catch((e) => {});
+          main_msg.edit({ embeds: [help_embed] }).catch((e) => { });
         } else {
           main_msg
             .edit({
@@ -469,7 +462,7 @@ module.exports = async (client) => {
 
     colector.on("end", async (c, i) => {
       row.components.forEach((c) => c.setDisabled(true));
-      main_msg.edit({ components: [row] }).catch((e) => {});
+      main_msg.edit({ components: [row] }).catch((e) => { });
     });
   };
   /**
